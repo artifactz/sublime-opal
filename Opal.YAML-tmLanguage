@@ -1,0 +1,93 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Opal
+scopeName: source.opal
+fileTypes: [impl, sign]
+uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d4
+
+patterns:
+- name: comment.line.double-dash.opal
+  match: \-\-.*$
+- name: comment.block.opal
+  begin: /\*
+  end: \*/
+
+# FUN declarations
+- name: meta.function.opal
+  begin: ^\s*(FUN)\s+(\w*)\s*(\:)
+  end: ($)
+  contentName: meta.function.parameters
+  beginCaptures:
+    '1': { name: storage.type.function.opal }
+    '2': { name: entity.name.function.opal }
+    '3': { name: punctuation.definition.parameters.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.parameters.end.opal }
+  patterns:
+  - name: punctuation.seperator.parameters.opal
+    match: \*\*|\->
+  - name: variable.parameter.opal
+    match: nat|real|denotation|bool
+
+# DEF definitions
+- name: meta.function.opal
+  begin: ^\s*(DEF)\s+(\w*)\s*(\()
+  end: (\))\s*(==)
+  beginCaptures:
+    '1': { name: storage.type.function.opal }
+    '2': { name: entity.name.function.opal }
+    '3': { name: punctuation.definition.parameters.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.parameters.end.opal }
+    '2': { name: punctuation.section.function.begin.opal }
+  patterns:
+  - name: punctuation.seperator.parameters.opal
+    match: \,
+  - name: variable.parameter.opal
+    match: \w*
+
+# strings
+- name: string.quoted.double
+  begin: (")
+  end: (")|(\n)
+  beginCaptures:
+    '1': { name: punctuation.definition.string.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.string.end.opal }
+    '2': { name: invalid.illegal.unclosed-string.opal }
+
+# sequences
+- name: meta.structure.list
+  match: (<)\s*\w*(?:\s*,\s*\w*)*\s*(>)
+  captures:
+    '1': { name: punctuation.definition.list.begin.opal }    
+    '2': { name: punctuation.definition.list.end.opal }
+
+# keywords
+- name: keyword.meta.opal
+  match: ^\s*(SIGNATURE|IMPLEMENTATION)\b
+- name: keyword.control.import.opal
+  match: (^\s*IMPORT|\b(ONLY|COMPLETELY))\b
+- name: keyword.control.opal
+  match: \b(IF|THEN|ELSE|FI)\b
+- name: keyword.other.opal
+  match: \b(LET|IN|WHERE)\b
+- name: keyword.operator.comparison.opal
+  match: (<|>|(?<!=)=(?!=)|<=|>=)
+- name: keyword.operator.arithmetic.opal
+  match: (\+|\-)
+
+# known signatures
+- name: storage.type.opal
+  match: \b(Nat|Char)\b
+
+
+# imports
+#- name: meta.import
+#  begin: ^\s*(IMPORT)\s*\w*\s*(?:(ONLY)|(COMPLETELY))
+#  end: \n
+#  beginCaptures:
+#    '1': { name: keyword.control.import.opal }
+#    '2': { name: keyword.control.import.only.opal }
+#    '3': { name: keyword.control.import.completely.opal }
+...
