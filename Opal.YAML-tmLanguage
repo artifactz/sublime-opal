@@ -12,7 +12,7 @@ patterns:
   begin: /\*
   end: \*/
 
-# FUN declarations
+# FUN declaration
 - name: meta.function.opal
   begin: ^\s*(FUN)\s+(\w*)\s*(\:)
   end: ($)
@@ -27,9 +27,9 @@ patterns:
   - name: punctuation.seperator.parameters.opal
     match: \*\*|\->
   - name: variable.parameter.opal
-    match: nat|real|denotation|bool
+    match: nat|char|real|denotation|bool
 
-# DEF definitions
+# DEF definition
 - name: meta.function.opal
   begin: ^\s*(DEF)\s+(\w*)\s*(\()
   end: (\))\s*(==)
@@ -40,6 +40,28 @@ patterns:
   endCaptures:
     '1': { name: punctuation.definition.parameters.end.opal }
     '2': { name: punctuation.section.function.begin.opal }
+  patterns:
+  - name: punctuation.seperator.parameters.opal
+    match: \,
+  - name: variable.parameter.opal
+    match: \w*
+
+# DEF definition w/o parameters
+- name: meta.function.opal
+  begin: ^\s*(DEF)\s+(\w*)
+  end: (==)
+  beginCaptures:
+    '1': { name: storage.type.function.opal }
+    '2': { name: entity.name.function.opal }
+  endCaptures:
+    '1': { name: punctuation.section.function.begin.opal }
+
+# anonymous lambda function
+- name: meta.function.opal
+  begin: (\\\\)
+  end: \.
+  beginCaptures:
+    '1': { name: storage.type.function.opal }
   patterns:
   - name: punctuation.seperator.parameters.opal
     match: \,
@@ -77,10 +99,13 @@ patterns:
 - name: keyword.operator.arithmetic.opal
   match: (\+|\-)
 
-# known signatures
-- name: storage.type.opal
-  match: \b(Nat|Char)\b
+# builtin types
+- name: support.type.opal
+  match: \b(Nat|Char|Real)\b
 
+# builtin functions
+- name: support.function.builtin
+  match: \b(map|filter|zip)\b
 
 # imports
 #- name: meta.import

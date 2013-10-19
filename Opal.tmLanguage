@@ -70,7 +70,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>nat|real|denotation|bool</string>
+					<string>nat|char|real|denotation|bool</string>
 					<key>name</key>
 					<string>variable.parameter.opal</string>
 				</dict>
@@ -112,6 +112,66 @@
 					<string>punctuation.section.function.begin.opal</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>meta.function.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\,</string>
+					<key>name</key>
+					<string>punctuation.seperator.parameters.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\w*</string>
+					<key>name</key>
+					<string>variable.parameter.opal</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(DEF)\s+(\w*)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.opal</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(==)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.function.begin.opal</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function.opal</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\\\\)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\.</string>
 			<key>name</key>
 			<string>meta.function.opal</string>
 			<key>patterns</key>
@@ -216,9 +276,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(Nat|Char)\b</string>
+			<string>\b(Nat|Char|Real)\b</string>
 			<key>name</key>
-			<string>storage.type.opal</string>
+			<string>support.type.opal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(map|filter|zip)\b</string>
+			<key>name</key>
+			<string>support.function.builtin</string>
 		</dict>
 	</array>
 	<key>scopeName</key>
