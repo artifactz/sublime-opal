@@ -1,4 +1,6 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
+# http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
+# http://manual.macromates.com/en/language_grammars
 ---
 name: Opal
 scopeName: source.opal
@@ -31,8 +33,8 @@ patterns:
 
 # DEF definition
 - name: meta.function.opal
-  begin: ^\s*(DEF)\s+(\w*)\s*(\()
-  end: (\))\s*(==)
+  begin: ^\s*(DEF)\s+(\w*)\s*(?:(\())?
+  end: (?:(\)))?\s*(==)
   beginCaptures:
     '1': { name: storage.type.function.opal }
     '2': { name: entity.name.function.opal }
@@ -45,16 +47,6 @@ patterns:
     match: \,
   - name: variable.parameter.opal
     match: \w*
-
-# DEF definition w/o parameters
-- name: meta.function.opal
-  begin: ^\s*(DEF)\s+(\w*)
-  end: (==)
-  beginCaptures:
-    '1': { name: storage.type.function.opal }
-    '2': { name: entity.name.function.opal }
-  endCaptures:
-    '1': { name: punctuation.section.function.begin.opal }
 
 # anonymous lambda function
 - name: meta.function.opal
