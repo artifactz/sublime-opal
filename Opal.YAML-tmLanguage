@@ -60,6 +60,26 @@ patterns:
   - name: variable.parameter.opal
     match: \w*
 
+# SORT declaration
+- name: meta.sort.opal
+  begin: ^\s*(SORT)
+  end: $
+  beginCaptures:
+    '1': { name: storage.type.sort.opal }
+  patterns:
+  - name: entity.name.type.opal
+    match: \b\w*\b
+
+# numbers
+- name: constant.numeric.integer.opal
+  match: (\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!
+- name: constant.numeric.real.opal
+  match: \"(\d*\.\d+|\d+\.\d*)\"!
+- name: constant.numeric.hexadecimal.opal
+  match: \"0x\h+\"!
+- name: invalid.illegal.unexpected-number
+  match: \".*\"!
+
 # strings
 - name: string.quoted.double
   begin: (")

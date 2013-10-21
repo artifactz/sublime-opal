@@ -163,6 +163,55 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>^\s*(SORT)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.sort.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>$</string>
+			<key>name</key>
+			<string>meta.sort.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b\w*\b</string>
+					<key>name</key>
+					<string>entity.name.type.opal</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
+			<key>name</key>
+			<string>constant.numeric.integer.opal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\"(\d*\.\d+|\d+\.\d*)\"!</string>
+			<key>name</key>
+			<string>constant.numeric.real.opal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\"0x\h+\"!</string>
+			<key>name</key>
+			<string>constant.numeric.hexadecimal.opal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\".*\"!</string>
+			<key>name</key>
+			<string>invalid.illegal.unexpected-number</string>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(")</string>
 			<key>beginCaptures</key>
 			<dict>
