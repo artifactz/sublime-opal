@@ -256,6 +256,56 @@
 			<string>string.quoted.double.opal</string>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>(&lt;)(?=\s*\w+(\s*,\s*\w+)*\s*&gt;)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.begin.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(&gt;)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.end.opal</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.structure.list.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?&lt;=\&lt;|\,)\s*(?![&gt;,])</string>
+					<key>contentName</key>
+					<string>meta.structure.list.item.opal</string>
+					<key>end</key>
+					<string>\s*(?:(,)|(?=&gt;))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.list.opal</string>
+						</dict>
+					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>match</key>
 			<string>^\s*(SIGNATURE|IMPLEMENTATION)\b</string>
 			<key>name</key>

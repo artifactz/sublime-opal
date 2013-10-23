@@ -97,22 +97,21 @@ patterns:
     '2': { name: invalid.illegal.unclosed-string.opal }
 
 # sequences
-#- name: meta.structure.list.opal
-#  begin: (<)(?=\s*\w+(\s*,\s*\w+)*\s*>)
-#  end: (>)
-##  match: (<)\s*(\w+)(?:\s*(,)\s*(\w+))*\s*(>)
-#  beginCaptures:
-#    '1': { name: punctuation.definition.list.begin.opal }
-#  endCaptures:
-#    '1': { name: punctuation.definition.list.end.opal }
-#  patterns:
-#  - begin: (?<=\<|\,)\s*(?![\]\,])
-#    end: \s*(?:(,)|(?=\]))
-#    endCaptures:
-#      '1': { name: punctuation.separator.list.opal }
-#    contentName: meta.structure.list.item.opal
-##  - name: punctuation.separator.list.opal
-##    match: \,
+- name: meta.structure.list.opal
+  begin: (<)(?=\s*\w+(\s*,\s*\w+)*\s*>)
+  end: (>)
+  beginCaptures:
+    '1': { name: punctuation.definition.list.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.list.end.opal }
+  patterns:
+  - begin: (?<=\<|\,)\s*(?![>,])
+    end: \s*(?:(,)|(?=>))
+    endCaptures:
+      '1': { name: punctuation.separator.list.opal }
+    contentName: meta.structure.list.item.opal
+    patterns:
+    - include: '$self'
 
 # keywords
 - name: keyword.meta.opal
