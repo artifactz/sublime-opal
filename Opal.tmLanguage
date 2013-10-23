@@ -12,16 +12,32 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.opal</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>\-\-.*$</string>
+			<string>(\-\-).*$</string>
 			<key>name</key>
 			<string>comment.line.double-dash.opal</string>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>/\*</string>
+			<string>(/\*)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.block.opal</string>
+				</dict>
+			</dict>
 			<key>end</key>
-			<string>\*/</string>
+			<string>(\*/)</string>
 			<key>name</key>
 			<string>comment.block.opal</string>
 		</dict>
@@ -47,7 +63,7 @@
 				</dict>
 			</dict>
 			<key>contentName</key>
-			<string>meta.function.parameters</string>
+			<string>meta.function.parameters.opal</string>
 			<key>end</key>
 			<string>($)</string>
 			<key>endCaptures</key>
@@ -208,7 +224,7 @@
 			<key>match</key>
 			<string>\".*\"!</string>
 			<key>name</key>
-			<string>invalid.illegal.unexpected-number</string>
+			<string>invalid.illegal.unexpected-number.opal</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -237,26 +253,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.list.begin.opal</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.list.end.opal</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>(&lt;)\s*\w*(?:\s*,\s*\w*)*\s*(&gt;)</string>
-			<key>name</key>
-			<string>meta.structure.list</string>
+			<string>string.quoted.double.opal</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -284,27 +281,27 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(&lt;|&gt;|(?&lt;!=)=(?!=)|&lt;=|&gt;=)</string>
+			<string>(&lt;=|&gt;=|&lt;|&gt;|\|=|(?&lt;!=)=(?!=))</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.opal</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(\+|\-)</string>
+			<string>(\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.opal</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(Nat|Char|Real)\b</string>
+			<string>\b(Nat|Char|Real|Denotation)\b</string>
 			<key>name</key>
 			<string>support.type.opal</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(map|filter|zip)\b</string>
+			<string>\b(map|filter|zip|sqrt)\b</string>
 			<key>name</key>
-			<string>support.function.builtin</string>
+			<string>support.function.builtin.opal</string>
 		</dict>
 	</array>
 	<key>scopeName</key>

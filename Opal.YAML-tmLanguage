@@ -8,17 +8,23 @@ fileTypes: [impl, sign]
 uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d4
 
 patterns:
+
+# comments
 - name: comment.line.double-dash.opal
-  match: \-\-.*$
+  match: (\-\-).*$
+  captures:
+    '1': { name: punctuation.definition.comment.opal }
 - name: comment.block.opal
-  begin: /\*
-  end: \*/
+  begin: (/\*)
+  end: (\*/)
+  captures:
+    '1': { name: punctuation.definition.comment.block.opal }
 
 # FUN declaration
 - name: meta.function.opal
   begin: ^\s*(FUN)\s+(\w*)\s*(\:)
   end: ($)
-  contentName: meta.function.parameters
+  contentName: meta.function.parameters.opal
   beginCaptures:
     '1': { name: storage.type.function.opal }
     '2': { name: entity.name.function.opal }
@@ -77,11 +83,11 @@ patterns:
   match: \"(\d*\.\d+|\d+\.\d*)\"!
 - name: constant.numeric.hexadecimal.opal
   match: \"0x\h+\"!
-- name: invalid.illegal.unexpected-number
+- name: invalid.illegal.unexpected-number.opal
   match: \".*\"!
 
 # strings
-- name: string.quoted.double
+- name: string.quoted.double.opal
   begin: (")
   end: (")|(\n)
   beginCaptures:
@@ -91,11 +97,22 @@ patterns:
     '2': { name: invalid.illegal.unclosed-string.opal }
 
 # sequences
-- name: meta.structure.list
-  match: (<)\s*\w*(?:\s*,\s*\w*)*\s*(>)
-  captures:
-    '1': { name: punctuation.definition.list.begin.opal }    
-    '2': { name: punctuation.definition.list.end.opal }
+#- name: meta.structure.list.opal
+#  begin: (<)(?=\s*\w+(\s*,\s*\w+)*\s*>)
+#  end: (>)
+##  match: (<)\s*(\w+)(?:\s*(,)\s*(\w+))*\s*(>)
+#  beginCaptures:
+#    '1': { name: punctuation.definition.list.begin.opal }
+#  endCaptures:
+#    '1': { name: punctuation.definition.list.end.opal }
+#  patterns:
+#  - begin: (?<=\<|\,)\s*(?![\]\,])
+#    end: \s*(?:(,)|(?=\]))
+#    endCaptures:
+#      '1': { name: punctuation.separator.list.opal }
+#    contentName: meta.structure.list.item.opal
+##  - name: punctuation.separator.list.opal
+##    match: \,
 
 # keywords
 - name: keyword.meta.opal
@@ -107,17 +124,17 @@ patterns:
 - name: keyword.other.opal
   match: \b(LET|IN|WHERE)\b
 - name: keyword.operator.comparison.opal
-  match: (<|>|(?<!=)=(?!=)|<=|>=)
+  match: (<=|>=|<|>|\|=|(?<!=)=(?!=))
 - name: keyword.operator.arithmetic.opal
-  match: (\+|\-)
+  match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
 
 # builtin types
 - name: support.type.opal
-  match: \b(Nat|Char|Real)\b
+  match: \b(Nat|Char|Real|Denotation)\b
 
 # builtin functions
-- name: support.function.builtin
-  match: \b(map|filter|zip)\b
+- name: support.function.builtin.opal
+  match: \b(map|filter|zip|sqrt)\b
 
 # imports
 #- name: meta.import
