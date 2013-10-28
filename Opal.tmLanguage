@@ -203,71 +203,10 @@
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
-			<key>name</key>
-			<string>constant.numeric.integer.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\"(\d*\.\d+|\d+\.\d*)\"!</string>
-			<key>name</key>
-			<string>constant.numeric.real.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\"0x\h+\"!</string>
-			<key>name</key>
-			<string>constant.numeric.hexadecimal.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\".*\"!</string>
-			<key>name</key>
-			<string>invalid.illegal.unexpected-number.opal</string>
-		</dict>
-		<dict>
 			<key>begin</key>
-			<string>(")</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.opal</string>
-				</dict>
-			</dict>
+			<string>(?=\w+(?:\s*::\s*\w+)*\s*::\s+&lt;&gt;)</string>
 			<key>end</key>
-			<string>(")|(\n)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.opal</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>invalid.illegal.unclosed-string.opal</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.double.opal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(&lt;)(?=\s*\w+(\s*,\s*\w+)*\s*&gt;)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.list.begin.opal</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(&gt;)</string>
+			<string>(&lt;&gt;)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -281,65 +220,20 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>begin</key>
-					<string>(?&lt;=\&lt;|\,)\s*(?![&gt;,])</string>
-					<key>contentName</key>
-					<string>meta.structure.list.item.opal</string>
-					<key>end</key>
-					<string>\s*(?:(,)|(?=&gt;))</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.separator.list.opal</string>
-						</dict>
-					</dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
+					<key>match</key>
+					<string>(::)</string>
+					<key>name</key>
+					<string>punctuation.separator.list.opal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#evaluable</string>
 				</dict>
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>^\s*(SIGNATURE|IMPLEMENTATION)\b</string>
-			<key>name</key>
-			<string>keyword.meta.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(^\s*IMPORT|\b(ONLY|COMPLETELY))\b</string>
-			<key>name</key>
-			<string>keyword.control.import.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(IF|THEN|ELSE|FI)\b</string>
-			<key>name</key>
-			<string>keyword.control.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(LET|IN|WHERE)\b</string>
-			<key>name</key>
-			<string>keyword.other.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(&lt;=|&gt;=|&lt;|&gt;|\|=|(?&lt;!=)=(?!=))</string>
-			<key>name</key>
-			<string>keyword.operator.comparison.opal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)</string>
-			<key>name</key>
-			<string>keyword.operator.arithmetic.opal</string>
+			<key>include</key>
+			<string>#evaluable</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -347,13 +241,111 @@
 			<key>name</key>
 			<string>support.type.opal</string>
 		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(map|filter|zip|sqrt)\b</string>
-			<key>name</key>
-			<string>support.function.builtin.opal</string>
-		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>evaluable</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
+					<key>name</key>
+					<string>constant.numeric.integer.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\"(\d*\.\d+|\d+\.\d*)\"!</string>
+					<key>name</key>
+					<string>constant.numeric.real.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\"0x\h+\"!</string>
+					<key>name</key>
+					<string>constant.numeric.hexadecimal.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\".*\"!</string>
+					<key>name</key>
+					<string>invalid.illegal.unexpected-number.opal</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(")</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.opal</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(")|(\n)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.opal</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.opal</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.double.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>^\s*(SIGNATURE|IMPLEMENTATION)\b</string>
+					<key>name</key>
+					<string>keyword.meta.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(^\s*IMPORT|\b(ONLY|COMPLETELY))\b</string>
+					<key>name</key>
+					<string>keyword.control.import.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(IF|THEN|ELSE|FI)\b</string>
+					<key>name</key>
+					<string>keyword.control.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(LET|IN|WHERE)\b</string>
+					<key>name</key>
+					<string>keyword.other.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(&lt;=|&gt;=|&lt;|&gt;|\|=|(?&lt;!=)=(?!=))</string>
+					<key>name</key>
+					<string>keyword.operator.comparison.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)</string>
+					<key>name</key>
+					<string>keyword.operator.arithmetic.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(map|filter|zip|sqrt)\b</string>
+					<key>name</key>
+					<string>support.function.builtin.opal</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.opal</string>
 	<key>uuid</key>
