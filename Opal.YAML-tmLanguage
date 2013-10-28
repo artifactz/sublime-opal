@@ -22,7 +22,7 @@ patterns:
 
 # FUN declaration
 - name: meta.function.opal
-  begin: ^\s*(FUN)\s+(\w*)\s*(\:)
+  begin: ^\s*(FUN)\s+([\w?]+)\s*(\:)
   end: ($)
   contentName: meta.function.parameters.opal
   beginCaptures:
@@ -39,7 +39,7 @@ patterns:
 
 # DEF definition
 - name: meta.function.opal
-  begin: ^\s*(DEF)\s+(\w*)\s*(?:(\())?
+  begin: ^\s*(DEF)\s+([\w?]+)\s*(?:(\())?
   end: (?:(\)))?\s*(==)
   beginCaptures:
     '1': { name: storage.type.function.opal }
@@ -87,11 +87,13 @@ patterns:
     name: punctuation.separator.list.opal
   - include: '#evaluable'
 
+# TODO: tuples
+
 - include: '#evaluable'
 
 # builtin types
 - name: support.type.opal
-  match: \b(Nat|Char|Real|Denotation)\b
+  match: \b(Nat|Char|Real|Denotation|Bool)\b
 
 repository:
   evaluable:
