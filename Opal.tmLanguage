@@ -86,7 +86,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>nat|char|real|denotation|bool</string>
+					<string>\b(nat|char|real|denotation|bool|seq)\b</string>
 					<key>name</key>
 					<string>variable.parameter.opal</string>
 				</dict>
@@ -128,37 +128,6 @@
 					<string>punctuation.section.function.begin.opal</string>
 				</dict>
 			</dict>
-			<key>name</key>
-			<string>meta.function.opal</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>\,</string>
-					<key>name</key>
-					<string>punctuation.seperator.parameters.opal</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\w*</string>
-					<key>name</key>
-					<string>variable.parameter.opal</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(\\\\)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.type.function.opal</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>\.</string>
 			<key>name</key>
 			<string>meta.function.opal</string>
 			<key>patterns</key>
@@ -232,12 +201,49 @@
 			</array>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tuple.begin.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tuple.end.opal</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.structure.tuple.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(,)</string>
+					<key>name</key>
+					<string>punctuation.separator.tuple.opal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#evaluable</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>#evaluable</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(Nat|Char|Real|Denotation|Bool)\b</string>
+			<string>\b(Nat|Char|Real|Denotation|Bool|Seq)\b</string>
 			<key>name</key>
 			<string>support.type.opal</string>
 		</dict>
@@ -249,6 +255,45 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>begin</key>
+					<string>(\\\\)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.function.opal</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(\.)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.begin.opal</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.function.opal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\,</string>
+							<key>name</key>
+							<string>punctuation.seperator.parameters.opal</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\w*</string>
+							<key>name</key>
+							<string>variable.parameter.opal</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
 					<key>match</key>
 					<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
 					<key>name</key>
@@ -256,7 +301,13 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\"(\d*\.\d+|\d+\.\d*)\"!</string>
+					<string>\"\.?\"!</string>
+					<key>name</key>
+					<string>invalid.illegal.empty-number.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\"[+-]?\d*(\.\d*)?(e[+-]?\d+)?\"!</string>
 					<key>name</key>
 					<string>constant.numeric.real.opal</string>
 				</dict>
@@ -336,6 +387,12 @@
 					<string>(\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)</string>
 					<key>name</key>
 					<string>keyword.operator.arithmetic.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(and|or)\b</string>
+					<key>name</key>
+					<string>keyword.operator.logical.opal</string>
 				</dict>
 				<dict>
 					<key>match</key>

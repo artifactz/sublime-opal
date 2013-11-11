@@ -35,7 +35,7 @@ patterns:
   - name: punctuation.seperator.parameters.opal
     match: \*\*|\->
   - name: variable.parameter.opal
-    match: nat|char|real|denotation|bool
+    match: \b(nat|char|real|denotation|bool|seq)\b
 
 # DEF definition
 - name: meta.function.opal
@@ -48,18 +48,6 @@ patterns:
   endCaptures:
     '1': { name: punctuation.definition.parameters.end.opal }
     '2': { name: punctuation.section.function.begin.opal }
-  patterns:
-  - name: punctuation.seperator.parameters.opal
-    match: \,
-  - name: variable.parameter.opal
-    match: \w*
-
-# anonymous lambda function
-- name: meta.function.opal
-  begin: (\\\\)
-  end: \.
-  beginCaptures:
-    '1': { name: storage.type.function.opal }
   patterns:
   - name: punctuation.seperator.parameters.opal
     match: \,
@@ -87,22 +75,49 @@ patterns:
     name: punctuation.separator.list.opal
   - include: '#evaluable'
 
-# TODO: tuples
+- name: meta.structure.tuple.opal
+  begin: (\()
+  end: (\))
+  beginCaptures:
+    '1': { name: punctuation.definition.tuple.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.tuple.end.opal }
+  patterns:
+  - match: (,)
+    name: punctuation.separator.tuple.opal
+  - include: '#evaluable'
 
 - include: '#evaluable'
 
 # builtin types
 - name: support.type.opal
-  match: \b(Nat|Char|Real|Denotation|Bool)\b
+  match: \b(Nat|Char|Real|Denotation|Bool|Seq)\b
 
 repository:
   evaluable:
     patterns:
+    # anonymous lambda function
+      - name: meta.function.opal
+        begin: (\\\\)
+        end: (\.)
+        beginCaptures:
+          '1': { name: storage.type.function.opal }
+        endCaptures:
+          '1': { name: punctuation.section.function.begin.opal }
+        patterns:
+        - name: punctuation.seperator.parameters.opal
+          match: \,
+        - name: variable.parameter.opal
+          match: \w*
     # numbers
       - name: constant.numeric.integer.opal
         match: (\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!
+      - name: invalid.illegal.empty-number.opal
+        match: \"\.?\"!
       - name: constant.numeric.real.opal
-        match: \"(\d*\.\d+|\d+\.\d*)\"!
+        #match: \"(\d*\.\d+|\d+\.\d*)\"!
+        match: \"[+-]?\d*(\.\d*)?(e[+-]?\d+)?\"!
+        # https://projects.uebb.tu-berlin.de/opal/dosfop/2.4a/bibopalicaman/Real.html
       - name: constant.numeric.hexadecimal.opal
         match: \"0x\h+\"!
       - name: invalid.illegal.unexpected-number.opal
@@ -131,6 +146,8 @@ repository:
         match: (<=|>=|<|>|\|=|(?<!=)=(?!=))
       - name: keyword.operator.arithmetic.opal
         match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
+      - name: keyword.operator.logical.opal
+        match: \b(and|or|not)\b
 
       # builtin functions
       - name: support.function.builtin.opal
