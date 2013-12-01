@@ -43,7 +43,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(FUN)\s+([\w?]+)\s*(\:)</string>
+			<string>^\s*(FUN)\s+([^\s():]+)\s*(\:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -65,15 +65,7 @@
 			<key>contentName</key>
 			<string>meta.function.parameters.opal</string>
 			<key>end</key>
-			<string>($)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.end.opal</string>
-				</dict>
-			</dict>
+			<string>($)|(?=\-\-)|(?=/\*)</string>
 			<key>name</key>
 			<string>meta.function.opal</string>
 			<key>patterns</key>
@@ -94,7 +86,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(DEF)\s+([\w?]+)\s*(?:(\())?</string>
+			<string>^\s*(DEF)\s+([^\s():]+)\s*(?:(\())?</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -295,6 +287,12 @@
 				</dict>
 				<dict>
 					<key>match</key>
+					<string>\".\"!</string>
+					<key>name</key>
+					<string>constant.character.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
 					<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
 					<key>name</key>
 					<string>constant.numeric.integer.opal</string>
@@ -366,7 +364,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(IF|THEN|ELSE|FI)\b</string>
+					<string>\b(IF|THEN|ELSE|OTHERWISE|FI)\b</string>
 					<key>name</key>
 					<string>keyword.control.opal</string>
 				</dict>
