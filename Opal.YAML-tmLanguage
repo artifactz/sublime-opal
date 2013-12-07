@@ -20,6 +20,12 @@ patterns:
   captures:
     '1': { name: punctuation.definition.comment.block.opal }
 
+# meta keywords
+- name: keyword.meta.opal
+  match: ^\s*(SIGNATURE|IMPLEMENTATION)\b
+- name: keyword.control.import.opal
+  match: (^\s*IMPORT|\b(ONLY|COMPLETELY))\b
+
 # FUN declaration
 - name: meta.function.opal
   begin: ^\s*(FUN)\s+([^\s():]+)\s*(\:) # \S = non-whitespace character
@@ -36,6 +42,16 @@ patterns:
     match: \*\*|\->
   - name: variable.parameter.opal
     match: \b(nat|char|real|denotation|bool|seq)\b
+
+# infix DEF definition
+- name: meta.function.opal
+  match: ^\s*(DEF)\s+([^\s():]+)\s+([^\s():]+)\s+([^\s():]+)\s*(==)
+  captures:
+    '1': { name: storage.type.function.opal }
+    '2': { name: variable.parameter.opal }
+    '3': { name: entity.name.function.opal }
+    '4': { name: variable.parameter.opal }
+    '5': { name: punctuation.section.function.begin.opal }
 
 # DEF definition
 - name: meta.function.opal
@@ -55,14 +71,24 @@ patterns:
     match: \w*
 
 # SORT declaration
-- name: meta.sort.opal
+- name: meta.type.sort.opal
   begin: ^\s*(SORT)
   end: $
   beginCaptures:
     '1': { name: storage.type.sort.opal }
   patterns:
-  - name: entity.name.type.opal
-    match: \b\w*\b
+  - name: entity.name.function.type.sort.opal
+    match: \b[^\s():]+\b
+
+# DATA/TYPE definition
+- name: meta.type.data.opal
+  begin: ^\s*(DATA|TYPE)\s+([^\s():]+)\s*
+  end: \s*(==)
+  beginCaptures:
+    '1': { name: storage.type.data.opal }
+    '2': { name: entity.name.function.type.data.opal }
+  endCaptures:
+    '1': { name: punctuation.section.type.begin.opal }
 
 # sequences
 - name: meta.structure.list.opal
@@ -106,9 +132,20 @@ repository:
           '1': { name: punctuation.section.function.begin.opal }
         patterns:
         - name: punctuation.seperator.parameters.opal
-          match: \,
+          match: \s*\,\s*
         - name: variable.parameter.opal
           match: \w*
+
+    # strings
+      - name: string.quoted.double.opal
+        begin: (")
+        end: (")(?!\!)|(\n)
+        beginCaptures:
+          '1': { name: punctuation.definition.string.begin.opal }
+        endCaptures:
+          '1': { name: punctuation.definition.string.end.opal }
+          '3': { name: invalid.illegal.unclosed-string.opal }
+
     # character
       - name: constant.character.opal
         match: \".\"!
@@ -126,21 +163,13 @@ repository:
       - name: invalid.illegal.unexpected-number.opal
         match: \".*\"!
 
-      # strings
-      - name: string.quoted.double.opal
-        begin: (")
-        end: (")|(\n)
-        beginCaptures:
-          '1': { name: punctuation.definition.string.begin.opal }
-        endCaptures:
-          '1': { name: punctuation.definition.string.end.opal }
-          '2': { name: invalid.illegal.unclosed-string.opal }
+    # builtin functions
+      - name: support.function.builtin.opal
+        match: \b(map|filter|zip|sqrt)\b
+      - name: support.function.builtin.opal
+        match: <>\?|<>(?!\?)
 
-      # keywords
-      - name: keyword.meta.opal
-        match: ^\s*(SIGNATURE|IMPLEMENTATION)\b
-      - name: keyword.control.import.opal
-        match: (^\s*IMPORT|\b(ONLY|COMPLETELY))\b
+    # evaluable keywords
       - name: keyword.control.opal
         match: \b(IF|THEN|ELSE|OTHERWISE|FI)\b
       - name: keyword.other.opal
@@ -151,8 +180,4 @@ repository:
         match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
       - name: keyword.operator.logical.opal
         match: \b(and|or|not)\b
-
-      # builtin functions
-      - name: support.function.builtin.opal
-        match: \b(map|filter|zip|sqrt)\b
 ...
