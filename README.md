@@ -15,7 +15,7 @@ Set Syntax: Opal
 whenever you want. Opal files (*.impl, *.sign) are being recognized.
 
 #### Sublime Package Control
-You can make your life easier using Sublime Package Control and get updates automatically.
-If you've got it installed:
-[Ctrl]+[Shift]+P Package Control: Add Repository
+You can make your life easier using Sublime Package Control and get updates automatically.  
+If you've got it installed:  
+[Ctrl]+[Shift]+P Package Control: Add Repository  
 Use this site's address: `https://github.com/artifactz/sublime-opal`
