@@ -1,0 +1,63 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+# http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
+# http://manual.macromates.com/en/language_grammars
+---
+name: Opal SysDefs
+scopeName: source.opalsysdefs
+fileTypes: [SysDefs]
+uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d5
+
+
+patterns:
+
+# $(xxx) as string
+
+
+# comment
+- name: comment.line.number-sign.opalsysdefs
+  match: (#).*$
+  captures:
+    '1': { name: punctuation.definition.comment.opalsysdefs }
+
+
+
+
+# OPAL_LIBS
+#- name: meta.opallibs.opalsysdefs
+#  match: ^\s*(OPAL_LIBS)\s*(\+=)\s*(\$)\((\w+)\)$
+#  captures:
+#    '1': { name: keyword.meta.opalsysdefs }
+#    '2': { name: punctuation.separator.keyvaluepair.opalsysdefs }
+#    '3': { name: keyword.operator.opalsysdefs }
+#    '4': { name: entity.name.function.opalsysdefs }
+
+# some other key value pair
+- name: meta.keyvaluepair.opalsysdefs
+  begin: ^\s*(TOPSTRUCT|TOPCOM|OPAL_LIBS)\s*(\+?=)
+  end: \n|(?=#)
+  beginCaptures:
+    '1': { name: variable.parameter.opalsysdefs }
+    '2': { name: punctuation.separator.keyvaluepair.opalsysdefs }
+  patterns:
+  - include: '#value'
+
+- name: invalid.illegal.justkidding.noseriously.whoknows.opalsysdefs
+  match: .*
+
+repository:
+  value:
+    patterns:
+      # kinda stringy dollar operator thingy
+      - name: meta.structure.thingy.opalsysdefs
+        begin: (\$)(\()
+        end: (\))
+        beginCaptures:
+          '1': { name: keyword.dollar.opalsysdefs }
+          '2': { name: punctuation.definition.parameters.begin.opalsysdefs }
+        endCaptures:
+          '1': { name: punctuation.definition.parameters.end.opalsysdefs }
+        contentName: string.other.opalsysdefs
+
+      - name: string.other.opalsysdefs
+        match: ([\w\?\_])*
+...
