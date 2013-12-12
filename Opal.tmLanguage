@@ -90,9 +90,9 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(nat|char|real|denotation|bool|seq)\b</string>
+					<string>\b(\w+)\b</string>
 					<key>name</key>
-					<string>variable.parameter.opal</string>
+					<string>storage.type.opal</string>
 				</dict>
 			</array>
 		</dict>
@@ -240,6 +240,80 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>(\w+)\s*\(\s*(\w+)\s*(:)\s*(\w+)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.constructor.opal</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.opal</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.seperator.type.opal</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>meta.type.constructors.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\,</string>
+					<key>name</key>
+					<string>punctuation.seperator.parameters.opal</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.opal</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\[(\w*)\]</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.opal</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.seperator.type.opal</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.opal</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\w+)\s*(:)\s*(\w+)</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(?=\w+(?:\s*::\s*\w+)*\s*::\s+&lt;&gt;)</string>
 			<key>end</key>
 			<string>(&lt;&gt;)</string>
@@ -361,31 +435,26 @@
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>(")</string>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.opal</string>
 						</dict>
-					</dict>
-					<key>end</key>
-					<string>(")(?!\!)|(\n)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.string.end.opal</string>
-						</dict>
-						<key>3</key>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>invalid.illegal.unclosed-string.opal</string>
 						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.opal</string>
+						</dict>
 					</dict>
+					<key>match</key>
+					<string>(\")(?:\\\\|\\\"|[^\"]|(\n))*(\")</string>
 					<key>name</key>
 					<string>string.quoted.double.opal</string>
 				</dict>
@@ -427,7 +496,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(map|filter|zip|sqrt)\b</string>
+					<string>\b(map|filter|zip|reduce|sqrt)\b</string>
 					<key>name</key>
 					<string>support.function.builtin.opal</string>
 				</dict>

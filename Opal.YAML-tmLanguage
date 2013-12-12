@@ -7,6 +7,8 @@ scopeName: source.opal
 fileTypes: [impl, sign]
 uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d4
 
+# TODO: script to wrap all builtin structures into a Nat|Bool|Seq|... format
+
 patterns:
 
 # comments
@@ -40,8 +42,9 @@ patterns:
   patterns:
   - name: punctuation.seperator.parameters.opal
     match: \*\*|\->
-  - name: variable.parameter.opal
-    match: \b(nat|char|real|denotation|bool|seq)\b
+  - name: storage.type.opal #variable.parameter.opal
+    #match: \b(nat|char|real|denotation|bool|seq)\b
+    match: \b(\w+)\b
 
 # infix DEF definition
 - name: meta.function.opal
@@ -89,6 +92,46 @@ patterns:
     '2': { name: entity.name.function.type.data.opal }
   endCaptures:
     '1': { name: punctuation.section.type.begin.opal }
+
+# DATA/TYPE constructor
+- name: meta.type.constructors.opal
+  begin: (\w+)\s*\(\s*(\w+)\s*(:)\s*(\w+)
+  end: \)
+  beginCaptures:
+    '1': { name: entity.name.function.constructor.opal }
+    '2': { name: variable.parameter.opal }
+    '3': { name: punctuation.seperator.type.opal }
+    '4': { name: storage.type.opal }
+  patterns:
+  - name: punctuation.seperator.parameters.opal
+    match: \,
+  - match: \[(\w*)\]
+    captures:
+      '1': { name: storage.type.opal }
+  - match: (\w+)\s*(:)\s*(\w+)
+    captures:
+      '1': { name: variable.parameter.opal }
+      '2': { name: punctuation.seperator.type.opal }
+      '3': { name: storage.type.opal }
+
+# Y U NO WORKING???? AARRRGGHHH!!
+# DATA/TYPE constructor
+#  match: (\w+)\s*\(\s*(\w+)\s*(:)\s*(\w+)(\s*)((,)(\s*)(\w+)(\s*)(:)(\s*)(\w+)(\s*))*\)
+#  captures:
+#    '1': { name: entity.name.function.constructor.opal }
+#    '2': { name: variable.parameter.opal }
+#    '3': { name: punctuation.seperator.type.1.opal }
+#    '4': { name: storage.type.opal }
+#    '5': { name: test1.opal }
+#    '6': { name: test.extended.opal }
+#    '7': { name: punctuation.seperator.parameters.opal }
+#    '8': { name: test2.opal }
+#    '9': { name: variable.parameter.opal }
+#    '10': { name: test3.opal }
+#    '11': { name: punctuation.seperator.type.2.opal }
+#    '12': { name: test4.opal }
+#    '13': { name: storage.type.opal }
+#    '14': { name: test5.opal }
 
 # sequences
 - name: meta.structure.list.opal
@@ -138,13 +181,18 @@ repository:
 
     # strings
       - name: string.quoted.double.opal
-        begin: (")
-        end: (")(?!\!)|(\n)
-        beginCaptures:
+        match: (\")(?:\\\\|\\\"|[^\"]|(\n))*(\")
+        captures:
           '1': { name: punctuation.definition.string.begin.opal }
-        endCaptures:
-          '1': { name: punctuation.definition.string.end.opal }
-          '3': { name: invalid.illegal.unclosed-string.opal }
+          '2': { name: invalid.illegal.unclosed-string.opal }
+          '3': { name: punctuation.definition.string.end.opal }
+        #begin: (")
+        #end: (")(?!\!)|(\n)
+        #beginCaptures:
+        #  '1': { name: punctuation.definition.string.begin.opal }
+        #endCaptures:
+        #  '1': { name: punctuation.definition.string.end.opal }
+        #  '3': { name: invalid.illegal.unclosed-string.opal }
 
     # character
       - name: constant.character.opal
@@ -165,7 +213,7 @@ repository:
 
     # builtin functions
       - name: support.function.builtin.opal
-        match: \b(map|filter|zip|sqrt)\b
+        match: \b(map|filter|zip|reduce|sqrt)\b
       - name: support.function.builtin.opal
         match: <>\?|<>(?!\?)
 
