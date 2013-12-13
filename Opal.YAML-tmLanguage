@@ -30,7 +30,7 @@ patterns:
 
 # FUN declaration
 - name: meta.function.opal
-  begin: ^\s*(FUN)\s+([^\s():]+)\s*(\:) # \S = non-whitespace character
+  begin: ^\s*(FUN)\s+([^\"():]+)\s*(\:) # \S = non-whitespace character
   end: ($)|(?=\-\-)|(?=/\*)
   contentName: meta.function.parameters.opal
   beginCaptures:
@@ -133,28 +133,29 @@ patterns:
 #    '13': { name: storage.type.opal }
 #    '14': { name: test5.opal }
 
+# temporarilly disabled
 # sequences
-- name: meta.structure.list.opal
-  begin: (?=\w+(?:\s*::\s*\w+)*\s*::\s+<>)
-  end: (<>)
-  endCaptures:
-    '1': { name: punctuation.definition.list.end.opal }
-  patterns:
-  - match: (::)
-    name: punctuation.separator.list.opal
-  - include: '#evaluable'
+#- name: meta.structure.list.opal
+#  begin: (?=\w+(?:\s*::\s*\w+)*\s*::\s+<>)
+#  end: (<>)
+#  endCaptures:
+#    '1': { name: punctuation.definition.list.end.opal }
+#  patterns:
+#  - match: (::)
+#    name: punctuation.separator.list.opal
+#  - include: '#evaluable'
 
-- name: meta.structure.tuple.opal
-  begin: (\()
-  end: (\))
-  beginCaptures:
-    '1': { name: punctuation.definition.tuple.begin.opal }
-  endCaptures:
-    '1': { name: punctuation.definition.tuple.end.opal }
-  patterns:
-  - match: (,)
-    name: punctuation.separator.tuple.opal
-  - include: '#evaluable'
+#- name: meta.structure.tuple.opal
+#  begin: (\()
+#  end: (\))
+#  beginCaptures:
+#    '1': { name: punctuation.definition.tuple.begin.opal }
+#  endCaptures:
+#    '1': { name: punctuation.definition.tuple.end.opal }
+#  patterns:
+#  - match: (,)
+#    name: punctuation.separator.tuple.opal
+#  - include: '#evaluable'
 
 - include: '#evaluable'
 
@@ -166,7 +167,7 @@ repository:
   evaluable:
     patterns:
     # anonymous lambda function
-      - name: meta.function.opal
+      - name: meta.function.anonymous.opal
         begin: (\\\\)
         end: (\.)
         beginCaptures:
@@ -181,7 +182,7 @@ repository:
 
     # strings
       - name: string.quoted.double.opal
-        match: (\")(?:\\\\|\\\"|[^\"]|(\n))*(\")
+        match: (\")(?:\\\\|\\\"|[^\"]|(\n))*(\")(?!\!)
         captures:
           '1': { name: punctuation.definition.string.begin.opal }
           '2': { name: invalid.illegal.unclosed-string.opal }
