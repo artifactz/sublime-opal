@@ -10,6 +10,8 @@ uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d4
 
 patterns:
 
+# WIP: string escaped chars
+
 # comments
 - name: comment.line.double-dash.opal
   match: (--).*$
@@ -179,13 +181,27 @@ repository:
         - name: variable.parameter.opal
           match: \w*
 
+# opalreport.pdf p. 53 - need to test...
+# \a (alarm)
+# \b (backspace)
+# \f (formfeed)
+# \r (carriage return)
+# \t (tabulator)
+# \v (vertical tab)
+# \\ (single backslash)
+# \? (questionmark)
+# \’ (single quote)
+# \" (double quote)
     # strings
       - name: string.quoted.double.opal
-        match: (\")(?:\\\\|\\\"|[^\"]|(\n))*(\")(?!\!)
+        match: (\")(?:(\\\\)|(\\\")|(\\n)|[^\"]|(\n))*(\")(?!\!)
         captures:
           '1': { name: punctuation.definition.string.begin.opal }
-          '2': { name: invalid.illegal.unclosed-string.opal }
-          '3': { name: punctuation.definition.string.end.opal }
+          '2': { name: constant.character.escape.backslash.opal }
+          '3': { name: constant.character.escape.double-quote.opal }
+          '4': { name: constant.character.escape.newline.opal }
+          '5': { name: invalid.illegal.unclosed-string.opal }
+          '6': { name: punctuation.definition.string.end.opal }
         #begin: (")
         #end: (")(?!\!)|(\n)
         #beginCaptures:
@@ -228,4 +244,6 @@ repository:
         match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
       - name: keyword.operator.logical.opal
         match: \b(and|or|not)\b
+      - name: keyword.operator.sequence.opal
+        match: (::)
 ...

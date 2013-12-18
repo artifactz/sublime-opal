@@ -379,16 +379,31 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>invalid.illegal.unclosed-string.opal</string>
+							<string>constant.character.escape.backslash.opal</string>
 						</dict>
 						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>constant.character.escape.double-quote.opal</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>constant.character.escape.newline.opal</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.unclosed-string.opal</string>
+						</dict>
+						<key>6</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.opal</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\")(?:\\\\|\\\"|[^\"]|(\n))*(\")(?!\!)</string>
+					<string>(\")(?:(\\\\)|(\\\")|(\\n)|[^\"]|(\n))*(\")(?!\!)</string>
 					<key>name</key>
 					<string>string.quoted.double.opal</string>
 				</dict>
@@ -469,6 +484,12 @@
 					<string>\b(and|or|not)\b</string>
 					<key>name</key>
 					<string>keyword.operator.logical.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(::)</string>
+					<key>name</key>
+					<string>keyword.operator.sequence.opal</string>
 				</dict>
 			</array>
 		</dict>
