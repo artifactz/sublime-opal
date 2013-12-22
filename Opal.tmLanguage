@@ -399,12 +399,6 @@
 					<string>constant.numeric.hexadecimal.opal</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>\".*\"!</string>
-					<key>name</key>
-					<string>invalid.illegal.unexpected-number.opal</string>
-				</dict>
-				<dict>
 					<key>begin</key>
 					<string>(\")</string>
 					<key>beginCaptures</key>
@@ -501,6 +495,12 @@
 							<string>invalid.illegal.unknown-escape.opal</string>
 						</dict>
 					</array>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\".*\"!</string>
+					<key>name</key>
+					<string>invalid.illegal.unexpected-number.opal</string>
 				</dict>
 				<dict>
 					<key>match</key>

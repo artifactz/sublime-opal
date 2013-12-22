@@ -193,8 +193,6 @@ repository:
         # https://projects.uebb.tu-berlin.de/opal/dosfop/2.4a/bibopalicaman/Real.html
       - name: constant.numeric.hexadecimal.opal
         match: \"0x\h+\"!
-      - name: invalid.illegal.unexpected-number.opal
-        match: \".*\"!
 
     # strings
       - name: string.quoted.double.opal
@@ -229,6 +227,10 @@ repository:
             match: \\\?
           - name: invalid.illegal.unknown-escape.opal
             match: \\.
+
+    # consider every other string-exclamation-like format an illegal number
+      - name: invalid.illegal.unexpected-number.opal
+        match: \".*\"!
 
     # builtin functions
       - name: support.function.builtin.opal
