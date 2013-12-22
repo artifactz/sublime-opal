@@ -21,9 +21,33 @@ patterns:
   captures:
     '1': { name: punctuation.definition.comment.block.opal }
 
+# SIGNATURE / IMPLEMENTATION w/o abstracts
+- name: meta.signature-implementation.opal
+  #match: ^\s*(SIGNATURE|IMPLEMENTATION)\s+([^A-Z])?(\w+)(?:\s*(\[)\s*([^,]+)(?:\s*(,)\s*([^,]+))*(\]))?
+  match: ^\s*(SIGNATURE|IMPLEMENTATION)\s+([^A-Z])?(\w+)\s*$
+  captures:
+    '1': { name: keyword.meta.signature-implementation.opal }
+    '2': { name: invalid.illegal.signature-implementation.first-letter-not-uppercase.opal }
+    '3': { name: entity.name.section.module.opal }
+
+# SIGNATURE / IMPLEMENTATION w/ abstracts
+- name: meta.signature-implementation.opal
+  begin: ^\s*(SIGNATURE|IMPLEMENTATION)\s+([^A-Z])?(\w+)\s*(\[)
+  end: (\])
+  beginCaptures:
+    '1': { name: keyword.meta.signature-implementation.opal }
+    '2': { name: invalid.illegal.signature-implementation.first-letter-not-uppercase.opal }
+    '3': { name: entity.name.section.module.opal }
+    '4': { name: punctuation.definition.inheritance.begin.opal }
+  endCaptures:
+    '1': { name: punctuation.definition.inheritance.end.opal }
+  patterns:
+  - name: punctuation.separator.inheritance.opal
+    match: \,
+  - name: entity.other.inherited-class.opal
+    match: (?:[^\,\]]+)
+
 # meta keywords
-- name: keyword.meta.opal
-  match: ^\s*(SIGNATURE|IMPLEMENTATION)\b
 - name: keyword.control.import.opal
   match: (^\s*IMPORT|\b(ONLY|COMPLETELY))\b
 
@@ -84,8 +108,8 @@ patterns:
 
 # DATA/TYPE definition
 - name: meta.type.data.opal
-  begin: ^\s*(DATA|TYPE)\s+([^\s():]+)\s*
-  end: \s*(==)
+  begin: ^\s*(DATA|TYPE)\s+([^\s():]+)
+  end: (==)
   beginCaptures:
     '1': { name: storage.type.data.opal }
     '2': { name: entity.name.function.type.data.opal }
@@ -166,89 +190,89 @@ repository:
   evaluable:
     patterns:
     # anonymous lambda function
-      - name: meta.function.anonymous.opal
-        begin: (\\\\)
-        end: (\.)
-        beginCaptures:
-          '1': { name: storage.type.function.opal }
-        endCaptures:
-          '1': { name: punctuation.section.function.begin.opal }
-        patterns:
-        - name: punctuation.seperator.parameters.opal
-          match: \s*\,\s*
-        - name: variable.parameter.opal
-          match: \w*
+    - name: meta.function.anonymous.opal
+      begin: (\\\\)
+      end: (\.)
+      beginCaptures:
+        '1': { name: storage.type.function.opal }
+      endCaptures:
+        '1': { name: punctuation.section.function.begin.opal }
+      patterns:
+      - name: punctuation.seperator.parameters.opal
+        match: \s*\,\s*
+      - name: variable.parameter.opal
+        match: \w*
 
     # character
-      - name: constant.character.opal
-        match: \".\"!
+    - name: constant.character.opal
+      match: \".\"!
     # numbers
-      - name: constant.numeric.integer.opal
-        match: (\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!
-      - name: invalid.illegal.empty-number.opal
-        match: \"\.?\"!
-      - name: constant.numeric.real.opal
-        #match: \"(\d*\.\d+|\d+\.\d*)\"!
-        match: \"[+-]?\d*(\.\d*)?(e[+-]?\d+)?\"!
-        # https://projects.uebb.tu-berlin.de/opal/dosfop/2.4a/bibopalicaman/Real.html
-      - name: constant.numeric.hexadecimal.opal
-        match: \"0x\h+\"!
+    - name: constant.numeric.integer.opal
+      match: (\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!
+    - name: invalid.illegal.empty-number.opal
+      match: \"\.?\"!
+    - name: constant.numeric.real.opal
+      #match: \"(\d*\.\d+|\d+\.\d*)\"!
+      match: \"[+-]?\d*(\.\d*)?(e[+-]?\d+)?\"!
+      # https://projects.uebb.tu-berlin.de/opal/dosfop/2.4a/bibopalicaman/Real.html
+    - name: constant.numeric.hexadecimal.opal
+      match: \"0x\h+\"!
 
     # strings
-      - name: string.quoted.double.opal
-        begin: (\")
-        end: (?:(\n)|(\"))(?!\!)
-        #match: (\")(?:(\\\\)|(\\\")|(\\n)|(\\.)|[^\"])*(?:(\n)|(\")(?!\!))
-        beginCaptures:
-          '1': { name: punctuation.definition.string.begin.opal }
-        endCaptures:
-          '1': { name: invalid.illegal.unclosed-string.opal }
-          '2': { name: punctuation.definition.string.end.opal }
-        patterns:
-          - name: constant.character.escape.backslash.opal
-            match: \\\\
-          - name: constant.character.escape.double-quote.opal
-            match: \\"
-          - name: constant.character.escape.alarm.opal
-            match: \\a
-          - name: constant.character.escape.backspace.opal
-            match: \\b
-          - name: constant.character.escape.formfeed.opal
-            match: \\f
-          - name: constant.character.escape.newline.opal
-            match: \\n
-          - name: constant.character.escape.carriage-return.opal
-            match: \\r
-          - name: constant.character.escape.tabulator.opal
-            match: \\t
-          - name: constant.character.escape.vertical-tab.opal
-            match: \\v
-          - name: constant.character.escape.questionmark.opal
-            match: \\\?
-          - name: invalid.illegal.unknown-escape.opal
-            match: \\.
+    - name: string.quoted.double.opal
+      begin: (\")
+      end: (?:(\n)|(\"))(?!\!)
+      #match: (\")(?:(\\\\)|(\\\")|(\\n)|(\\.)|[^\"])*(?:(\n)|(\")(?!\!))
+      beginCaptures:
+        '1': { name: punctuation.definition.string.begin.opal }
+      endCaptures:
+        '1': { name: invalid.illegal.unclosed-string.opal }
+        '2': { name: punctuation.definition.string.end.opal }
+      patterns:
+      - name: constant.character.escape.backslash.opal
+        match: \\\\
+      - name: constant.character.escape.double-quote.opal
+        match: \\"
+      - name: constant.character.escape.alarm.opal
+        match: \\a
+      - name: constant.character.escape.backspace.opal
+        match: \\b
+      - name: constant.character.escape.formfeed.opal
+        match: \\f
+      - name: constant.character.escape.newline.opal
+        match: \\n
+      - name: constant.character.escape.carriage-return.opal
+        match: \\r
+      - name: constant.character.escape.tabulator.opal
+        match: \\t
+      - name: constant.character.escape.vertical-tab.opal
+        match: \\v
+      - name: constant.character.escape.questionmark.opal
+        match: \\\?
+      - name: invalid.illegal.unknown-escape.opal
+        match: \\.
 
     # consider every other string-exclamation-like format an illegal number
-      - name: invalid.illegal.unexpected-number.opal
-        match: \".*\"!
+    - name: invalid.illegal.unexpected-number.opal
+      match: \".*\"!
 
     # builtin functions
-      - name: support.function.builtin.opal
-        match: \b(map|filter|zip|reduce|sqrt)\b
-      - name: support.function.builtin.opal
-        match: <>\?|<>(?!\?)
+    - name: support.function.builtin.opal
+      match: \b(map|filter|zip|reduce|sqrt)\b
+    - name: support.function.builtin.opal
+      match: <>\?|<>(?!\?)
 
     # evaluable keywords
-      - name: keyword.control.opal
-        match: \b(IF|THEN|ELSE|OTHERWISE|FI)\b
-      - name: keyword.other.opal
-        match: \b(LET|IN|WHERE)\b
-      - name: keyword.operator.comparison.opal
-        match: (<=|>=|<|>|\|=|(?<!=)=(?!=))
-      - name: keyword.operator.arithmetic.opal
-        match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
-      - name: keyword.operator.logical.opal
-        match: \b(and|or|not)\b
-      - name: keyword.operator.sequence.opal
-        match: (::)
+    - name: keyword.control.opal
+      match: \b(IF|THEN|ELSE|OTHERWISE|FI)\b
+    - name: keyword.other.opal
+      match: \b(LET|IN|WHERE)\b
+    - name: keyword.operator.comparison.opal
+      match: (<=|>=|<|>|\|=|(?<!=)=(?!=))
+    - name: keyword.operator.arithmetic.opal
+      match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
+    - name: keyword.operator.logical.opal
+      match: \b(and|or|not)\b
+    - name: keyword.operator.sequence.opal
+      match: (::)
 ...

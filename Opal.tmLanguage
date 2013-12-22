@@ -42,10 +42,82 @@
 			<string>comment.block.opal</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.meta.signature-implementation.opal</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.signature-implementation.first-letter-not-uppercase.opal</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.module.opal</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>^\s*(SIGNATURE|IMPLEMENTATION)\b</string>
+			<string>^\s*(SIGNATURE|IMPLEMENTATION)\s+([^A-Z])?(\w+)\s*$</string>
 			<key>name</key>
-			<string>keyword.meta.opal</string>
+			<string>meta.signature-implementation.opal</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(SIGNATURE|IMPLEMENTATION)\s+([^A-Z])?(\w+)\s*(\[)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.meta.signature-implementation.opal</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.signature-implementation.first-letter-not-uppercase.opal</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.module.opal</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.inheritance.begin.opal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\])</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.inheritance.end.opal</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.signature-implementation.opal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\,</string>
+					<key>name</key>
+					<string>punctuation.separator.inheritance.opal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?:[^\,\]]+)</string>
+					<key>name</key>
+					<string>entity.other.inherited-class.opal</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -211,7 +283,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(DATA|TYPE)\s+([^\s():]+)\s*</string>
+			<string>^\s*(DATA|TYPE)\s+([^\s():]+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -226,7 +298,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\s*(==)</string>
+			<string>(==)</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
