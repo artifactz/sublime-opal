@@ -454,9 +454,9 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\"\.?\"!</string>
+					<string>\b\d+\b</string>
 					<key>name</key>
-					<string>invalid.illegal.empty-number.opal</string>
+					<string>invalid.illegal.wrong-number.opal</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -482,7 +482,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?:(\n)|(\"))(?!\!)</string>
+					<string>(\n)|(\")</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
