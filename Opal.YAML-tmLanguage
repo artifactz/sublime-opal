@@ -272,7 +272,7 @@ repository:
     - name: keyword.operator.arithmetic.opal
       match: (\+|\-|\*|/|\bdiv\b|\^|\bpow\b|%|\bmod\b)
     - name: keyword.operator.logical.opal
-      match: \b(and|or|not)\b
+      match: (\b(and|or|not|)\b)|~
     - name: keyword.operator.sequence.opal
       match: (::)
 ...
