@@ -21,7 +21,7 @@ If you've got it installed:
 ```
 Package Control: Add Repository
 ```
-and use this site's address: `https://github.com/artifactz/sublime-opal`
+and use this site's address: `https://github.com/artifactz/sublime-opal`  
 Then [Ctrl]+[Shift]+P
 ```
 Package Control: Install Package
