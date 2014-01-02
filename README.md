@@ -19,6 +19,11 @@ You can make your life easier using [Sublime Package Control](https://sublime.wb
 If you've got it installed:  
 [Ctrl]+[Shift]+P
 ```
-Package Control: Add Repository  
+Package Control: Add Repository
 ```
 and use this site's address: `https://github.com/artifactz/sublime-opal`
+Then [Ctrl]+[Shift]+P
+```
+Package Control: Install Package
+sublime-opal
+```
