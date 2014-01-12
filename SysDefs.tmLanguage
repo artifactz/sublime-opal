@@ -26,7 +26,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\s*(TOPSTRUCT|TOPCOM|OPAL_LIBS)\s*(\+?=)</string>
+			<string>^\s*([A-Z_]+)\s*(\+?=)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>

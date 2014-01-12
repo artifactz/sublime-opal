@@ -1,6 +1,7 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
 # http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt
 # http://manual.macromates.com/en/language_grammars
+# http://projects.uebb.tu-berlin.de/opal/trac/wiki/MiniTutorial
 ---
 name: Opal SysDefs
 scopeName: source.opalsysdefs
@@ -18,7 +19,8 @@ patterns:
 
 # a key value pair
 - name: meta.keyvaluepair.opalsysdefs
-  begin: ^\s*(TOPSTRUCT|TOPCOM|OPAL_LIBS)\s*(\+?=)
+  #begin: ^\s*(TOPSTRUCT|TOPCOM|OPAL_LIBS)\s*(\+?=)
+  begin: ^\s*([A-Z_]+)\s*(\+?=)
   end: \n|(?=#)
   beginCaptures:
     '1': { name: variable.parameter.opalsysdefs }
