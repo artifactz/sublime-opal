@@ -412,6 +412,8 @@
 							<string>storage.type.function.opal</string>
 						</dict>
 					</dict>
+					<key>contentName</key>
+					<string>meta.definition.parameters.opal</string>
 					<key>end</key>
 					<string>(\.)</string>
 					<key>endCaptures</key>
@@ -433,8 +435,32 @@
 							<string>punctuation.seperator.parameters.opal</string>
 						</dict>
 						<dict>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>variable.parameter.opal</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.seperator.type.opal</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>storage.type.opal</string>
+								</dict>
+							</dict>
 							<key>match</key>
-							<string>\w*</string>
+							<string>(\w+)\s*(:)\s*(\w+)</string>
+							<key>name</key>
+							<string>meta.definition.parameter.opal</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\w+</string>
 							<key>name</key>
 							<string>variable.parameter.opal</string>
 						</dict>

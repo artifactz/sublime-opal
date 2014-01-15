@@ -193,6 +193,7 @@ repository:
     - name: meta.function.anonymous.opal
       begin: (\\\\)
       end: (\.)
+      contentName: meta.definition.parameters.opal
       beginCaptures:
         '1': { name: storage.type.function.opal }
       endCaptures:
@@ -200,8 +201,14 @@ repository:
       patterns:
       - name: punctuation.seperator.parameters.opal
         match: \s*\,\s*
+      - name: meta.definition.parameter.opal
+        match: (\w+)\s*(:)\s*(\w+)
+        captures:
+          '1': { name: variable.parameter.opal }
+          '2': { name: punctuation.seperator.type.opal }
+          '3': { name: storage.type.opal }
       - name: variable.parameter.opal
-        match: \w*
+        match: \w+
 
     # character
     - name: constant.character.opal
