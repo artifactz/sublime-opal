@@ -19,9 +19,14 @@
 					<key>name</key>
 					<string>punctuation.definition.comment.opal</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.comment.missing-whitespace.opal</string>
+				</dict>
 			</dict>
 			<key>match</key>
-			<string>(--).*$</string>
+			<string>(--)([^\s])?.*$</string>
 			<key>name</key>
 			<string>comment.line.double-dash.opal</string>
 		</dict>
@@ -644,7 +649,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(::)</string>
+					<string>(::)(?!\?)</string>
 					<key>name</key>
 					<string>keyword.operator.sequence.opal</string>
 				</dict>

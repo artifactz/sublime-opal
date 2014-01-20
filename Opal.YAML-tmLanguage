@@ -12,9 +12,10 @@ patterns:
 
 # comments
 - name: comment.line.double-dash.opal
-  match: (--).*$
+  match: (--)([^\s])?.*$
   captures:
     '1': { name: punctuation.definition.comment.opal }
+    '2': { name: invalid.illegal.comment.missing-whitespace.opal }
 - name: comment.block.opal
   begin: (/\*)
   end: (\*/)
@@ -281,5 +282,5 @@ repository:
     - name: keyword.operator.logical.opal
       match: (\b(and|or|not|)\b)|~
     - name: keyword.operator.sequence.opal
-      match: (::)
+      match: (::)(?!\?)       # ::? is discriminator
 ...
