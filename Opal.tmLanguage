@@ -473,12 +473,6 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\".\"!</string>
-					<key>name</key>
-					<string>constant.character.opal</string>
-				</dict>
-				<dict>
-					<key>match</key>
 					<string>(\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|64|128|256|512|1024|100|1000|10000|100000|1000000)\b)|\"\d+\"!</string>
 					<key>name</key>
 					<string>constant.numeric.integer.opal</string>
@@ -598,12 +592,6 @@
 							<string>invalid.illegal.unknown-escape.opal</string>
 						</dict>
 					</array>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\".*\"!</string>
-					<key>name</key>
-					<string>invalid.illegal.unexpected-number.opal</string>
 				</dict>
 				<dict>
 					<key>match</key>
