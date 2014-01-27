@@ -10,6 +10,8 @@ uuid: 3da0f3f0-8b32-41c9-857c-ce9be39b99d4
 
 patterns:
 
+# TODO: comment in multi-line constructor
+
 # comments
 - name: comment.line.double-dash.opal
   match: (--)([^\s])?.*$
