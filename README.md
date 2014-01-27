@@ -28,4 +28,4 @@ Package Control: Install Package
 sublime-opal
 ```
 _Please note that the manual setup and installation through Package Control are_ **XOR**_ed. Doing both results in two distinct installations of OPAL syntax highlighting, which probably is not what you want._  
-_If you're using a manually installed OPAL highlighting and want to try out adding it through Package Control, please delete `~/.config/sublime-text-2/Packages/` first._
+_If you're using a manually installed OPAL highlighting and want to try out adding it through Package Control, please delete `~/.config/sublime-text-2/Packages/Opal` first._
