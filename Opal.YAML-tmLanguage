@@ -227,7 +227,7 @@ repository:
       match: \"[+-]?\d*(\.\d*)?(e[+-]?\d+)?\"!
       # https://projects.uebb.tu-berlin.de/opal/dosfop/2.4a/bibopalicaman/Real.html
     - name: constant.numeric.hexadecimal.opal
-      match: \"0x\h+\"!
+      match: \"0x[0-9A-Fa-f]+\"!
 
     # strings (denotation)
     - name: string.quoted.double.opal
