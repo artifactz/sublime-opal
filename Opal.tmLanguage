@@ -491,7 +491,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\"0x\h+\"!</string>
+					<string>\"0x[0-9A-Fa-f]+\"!</string>
 					<key>name</key>
 					<string>constant.numeric.hexadecimal.opal</string>
 				</dict>
